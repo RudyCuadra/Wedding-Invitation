@@ -1,6 +1,7 @@
 # Ignorar el archivo .env en la carpeta web
 web/.env
 web/firebase-config.json
+android/app/google-services.json
 
 # Miscellaneous
 *.class
