@@ -1,0 +1,36 @@
+class AppAssets {
+  static const String background = 'assets/images/nosotros-fondo1.jpg';
+  static const String backgroundFour = 'assets/images/sectionFourImage.png';
+  static const String backgroundFourMobile = 'assets/images/sectionFourImage_mobile.jpg';
+  static const String background2 = 'assets/images/nosotros-fondo2.jpg';
+  static const String bottomImage = 'assets/images/bottom_blanco2x.png';
+  static const String backgroundSectionFour = 'assets/images/bottom_blanco2x_desktop.png';
+  static const String floresSectionFour = 'assets/images/flores_sectionfour.png';
+  static const String floresdosSectionFour = 'assets/images/flores_dos_sectionfour.png';
+  static const String flowersLeft = 'assets/images/flores_izquierda2x.png';
+  static const String flowersLeftNew = 'assets/images/SC1-FIZQUIERDA.png';
+  static const String flowersRight = 'assets/images/flores_derecha2x.png';
+  static const String flowersRightNew = 'assets/images/SC1-FDERECGA.png';
+  static const String flowersLeft2 = 'assets/images/flores_section2_izquierda.png';
+  static const String flowersLeft2New = 'assets/images/flores_bottom1.png';
+  static const String flowersRight2 = 'assets/images/flores_section2_derecha.png';
+  static const String flowersRight2New = 'assets/images/flores_bottom2.png';
+  static const String flowersRight3 = 'assets/images/flores_section3_derecha.png';
+  static const String flowersLeft3 = 'assets/images/flores_section3_izquierda.png';
+  static const String ringImage = 'assets/images/anillo_boda.png';
+  static const String secondSectionBackground = 'assets/images/second_section_background.jpg';
+  static const String bottomSectionFour = 'assets/images/bottom_sectionfour.png';
+  static const String iconoLocation = 'assets/images/icono-location.png';
+  static const String iconoRegalo = 'assets/images/icono-regalo.png';
+  static const String iconoEllas = 'assets/images/icono-ellas.png';
+  static const String iconoEllos = 'assets/images/icono-ellos.png';
+  static const String iconoTeEsperamos = 'assets/images/te-esperamos.png';
+  static const String imagenS1 = 'assets/images/Imagen1.png';
+  static const String imagenS1D = 'assets/images/Imagen1-desktop.png';
+  static const String imagenS2 = 'assets/images/Imagen2.png';
+  static const String imagenS2D = 'assets/images/Imagen2-desktop.png';
+  static const String imagenS3 = 'assets/images/Imagen3.png';
+  static const String imagenS3D = 'assets/images/Imagen3-desktop.png';
+  static const String iconoSobre = 'assets/images/enviar-dinero.png';
+  static const String iconoLogo = 'assets/images/LOGO.png';
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base href="$FLUTTER_BASE_HREF">
+
+    <meta charset="UTF-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <!--<meta name="description" content="A new Flutter project.">-->
+    <meta property="og:title" content="Boda Cuadra Orozco" />
+    <meta property="og:description" content="Te invitamos a nuestra boda, descubre los detalles aquí!" />
+    <meta property="og:image" content="https://i.postimg.cc/26SsSXhp/imagen-header.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://nuestra-boda-460b7.web.app/" />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Boda Cuadra Orozco" />
+    <meta name="twitter:description" content="Te invitamos a nuestra boda, descubre los detalles aquí!" />
+    <meta name="twitter:image" content="https://i.postimg.cc/26SsSXhp/imagen-header.png" />
+
+    <!-- iOS meta tags & icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="nuestra_boda">
+    <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon_logo.ico">
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics-compat.js"></script>
+    <script src="firebase-config.js"></script>
+
+    <script>
+        // Asegurar que Firebase se carga antes de inicializarlo
+        document.addEventListener("DOMContentLoaded", function() {
+          try {
+            fetch('/firebase-config.json')
+              .then(response => response.json())
+              .then(config => {
+                firebase.initializeApp(config);
+              })
+              .catch(error => console.error("🔥 Error cargando configuración de Firebase:", error));
+          } catch (e) {
+            console.error("🔥 Error al inicializar Firebase:", e);
+          }
+        });
+    </script>
+
+    <title>nuestra_boda</title>
+    <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+<!-- 🔹 Flutter se carga DESPUÉS de Firebase -->
+<script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
