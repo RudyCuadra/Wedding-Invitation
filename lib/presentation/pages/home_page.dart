@@ -5,7 +5,10 @@ import 'desktop/desktop_layout.dart';
 import 'mobile/mobile_layout.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  //const HomePage({super.key});
+  final int initialSection;
+
+  const HomePage({super.key, this.initialSection = 1});
 
   // Método para recargar la página
   Future<void> _reloadPage() async {
@@ -16,8 +19,10 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ResponsiveLayout(
-        desktop: const DesktopLayout(),
-        mobile: const MobileLayout(),
+        /*desktop: const DesktopLayout(),
+        mobile: const MobileLayout(),*/
+        desktop: DesktopLayout(initialSection: initialSection),
+        mobile: MobileLayout(initialSection: initialSection),
       ),
     );
   }

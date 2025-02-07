@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:go_router/go_router.dart';
 import 'package:nuestra_boda/presentation/pages/desktop/section_1.dart';
 import 'package:nuestra_boda/presentation/pages/desktop/section_2.dart';
 import 'package:nuestra_boda/presentation/pages/desktop/section_3.dart';
@@ -12,20 +13,28 @@ import 'package:nuestra_boda/presentation/pages/desktop/section_8.dart';
 import '../../../core/utils/ScrollControllerHandler.dart'; // Importa la clase
 
 class DesktopLayout extends StatefulWidget {
-  const DesktopLayout({super.key});
+  /*const DesktopLayout({super.key});
+
+  @override
+  _DesktopLayoutState createState() => _DesktopLayoutState();*/
+  final int initialSection;
+
+  const DesktopLayout({super.key, this.initialSection = 1});
 
   @override
   _DesktopLayoutState createState() => _DesktopLayoutState();
 }
 
 class _DesktopLayoutState extends State<DesktopLayout> {
-  final PageController _pageController = PageController();
+  //final PageController _pageController = PageController();
+  late PageController _pageController;
   late ScrollControllerHandler _scrollHandler;
   bool usePageController = true; // Variable para cambiar entre paginación o scroll normal
 
   @override
   void initState() {
     super.initState();
+    _pageController = PageController(initialPage: widget.initialSection - 1);
     _scrollHandler = ScrollControllerHandler(
       pageController: _pageController,
       onScrollModeChanged: (bool isMouse) {
@@ -36,6 +45,10 @@ class _DesktopLayoutState extends State<DesktopLayout> {
     );
   }
 
+  void _navigateToSection(int index) {
+    GoRouter.of(context).go('/section/${index + 1}');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Listener(
@@ -44,6 +57,7 @@ class _DesktopLayoutState extends State<DesktopLayout> {
           ? PageView(
         controller: _pageController,
         scrollDirection: Axis.vertical,
+        onPageChanged: (index) => _navigateToSection(index),
         physics: NeverScrollableScrollPhysics(), // Bloquea scroll manual
         children: const [
           DesktopSection1(),
@@ -58,6 +72,7 @@ class _DesktopLayoutState extends State<DesktopLayout> {
       )
           : PageView(
         scrollDirection: Axis.vertical, // Scroll libre sin paginación
+        onPageChanged: (index) => _navigateToSection(index),
         children: const [
           DesktopSection1(),
           DesktopSection2(),
