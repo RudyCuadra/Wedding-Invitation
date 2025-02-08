@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nuestra_boda/presentation/pages/confirmaciones_vista.dart';
 import 'package:nuestra_boda/presentation/pages/confirmar_asistencia.dart';
 import 'package:nuestra_boda/presentation/pages/home_page.dart';// Importa la pantalla de carga
 import 'core/theme/theme.dart';
@@ -32,6 +33,10 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: '/confirmar',
       builder: (context, state) => ConfirmarAsistencia(),
+    ),
+    GoRoute(
+      path: '/confirmaciones',
+      builder: (context, state) => ConfirmacionesVista(),
     ),
   ],
 );
