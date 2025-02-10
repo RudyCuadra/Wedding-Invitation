@@ -1,1 +1,11 @@
-{"hosting":{"public":"build/web","ignore":["firebase.json","**/.*","**/node_modules/**"],"rewrites":[{"source":"**","destination":"/index.html"}]},"flutter":{"platforms":{"android":{"default":{"projectId":"nuestra-boda-460b7","appId":"1:831751876132:android:ea56cfae39628678da72b1","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"nuestra-boda-460b7","configurations":{"android":"1:831751876132:android:ea56cfae39628678da72b1","ios":"1:831751876132:ios:92e25e8928e21577da72b1","macos":"1:831751876132:ios:92e25e8928e21577da72b1","web":"1:831751876132:web:3e6d9234eb04e4d8da72b1","windows":"1:831751876132:web:487ad587dc953feada72b1"}}}}}}
+{"hosting":{"public":"build/web","ignore":["firebase.json","**/.*","**/node_modules/**"],"rewrites":[{"source":"**","destination":"/index.html"}], "headers": [
+  {
+    "source": "/assets/env.txt",
+    "headers": [
+      {
+        "key": "Cache-Control",
+        "value": "no-cache"
+      }
+    ]
+  }
+]},"flutter":{"platforms":{"android":{"default":{"projectId":"nuestra-boda-460b7","appId":"1:831751876132:android:ea56cfae39628678da72b1","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"nuestra-boda-460b7","configurations":{"android":"1:831751876132:android:ea56cfae39628678da72b1","ios":"1:831751876132:ios:92e25e8928e21577da72b1","macos":"1:831751876132:ios:92e25e8928e21577da72b1","web":"1:831751876132:web:3e6d9234eb04e4d8da72b1","windows":"1:831751876132:web:487ad587dc953feada72b1"}}}}}}

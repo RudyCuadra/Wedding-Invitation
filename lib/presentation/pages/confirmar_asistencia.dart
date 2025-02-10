@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -23,7 +24,10 @@ class _ConfirmarAsistenciaState extends State<ConfirmarAsistencia> {
       _hasSearched = true;
     });
 
-    Query query = FirebaseFirestore.instance.collection('confirmaciones');
+    final firestore = FirebaseFirestore.instanceFor(app: Firebase.app());
+    Query query = firestore.collection('confirmaciones');
+
+    //Query query = FirebaseFirestore.instance.collection('confirmaciones');
 
     if (_nombreController.text.isNotEmpty) {
       query = query.where('nombre', isEqualTo: _nombreController.text);
@@ -42,8 +46,8 @@ class _ConfirmarAsistenciaState extends State<ConfirmarAsistencia> {
   }
 
   void _mostrarPopup(DocumentSnapshot invitado) {
-    bool asistira = invitado['asistira'];
-    bool pendiente = invitado['pendiente'];
+    bool asistira = (invitado['asistira'] is bool) ? invitado['asistira'] : false;
+    bool pendiente = (invitado['pendiente'] is bool) ? invitado['pendiente'] : true;
     bool guardadoConExito = false;
 
     showDialog(
@@ -269,56 +273,6 @@ class _ConfirmarAsistenciaState extends State<ConfirmarAsistencia> {
                   )
                       : Container(),
                 )
-                /*Expanded(
-                  child: _isLoading
-                      ? Center(child: CircularProgressIndicator())
-                      : _resultados.isNotEmpty
-                      ? ListView.builder(
-                    itemCount: _resultados.length,
-                    itemBuilder: (context, index) {
-                      var invitado = _resultados[index];
-                      return GestureDetector(
-                        onTap: () => _mostrarPopup(invitado),
-                        child: Container(
-                          padding: EdgeInsets.all(15),
-                          margin: EdgeInsets.symmetric(vertical: 5),
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "${invitado['nombre']} ${invitado['apellido']}",
-                                style: TextStyle(fontSize: 18),
-                              ),
-                              Text(
-                                _obtenerEstado(invitado['asistira'], invitado['pendiente']),
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                  color: invitado['pendiente']
-                                      ? Colors.orange
-                                      : (invitado['asistira'] ? Colors.green : Colors.red),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  )
-                      : _hasSearched
-                      ? Center(
-                    child: Text(
-                      "No se encontraron resultados coincidentes con ${_nombreController.text} ${_apellidoController.text}",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
-                    ),
-                  )
-                      : Container(),
-                ),*/
               ],
             ),
           ),

@@ -63,6 +63,8 @@ flutter:
 
   assets:
     - web/.env
+    - assets/env.txt
+    - web/firebase-config.json
     - assets/images/flores_izquierda.png
     - assets/images/flores_izquierda2x.png
     - assets/images/flores_derecha.png

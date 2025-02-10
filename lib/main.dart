@@ -1,6 +1,12 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'dart:html' as html; // Solo se usa en Web
+import 'dart:js_util' as js_util;
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:go_router/go_router.dart';
@@ -43,8 +49,13 @@ final GoRouter _router = GoRouter(
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: "web/.env");
+
+  //await dotenv.load(fileName: "assets/.env");
+  // Cargar el archivo .env renombrado a env.txt
+  await dotenv.load(fileName: "assets/env.txt");
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+
   usePathUrlStrategy();
   runApp(const MyApp());
 }
