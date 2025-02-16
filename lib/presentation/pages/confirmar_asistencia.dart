@@ -24,17 +24,23 @@ class _ConfirmarAsistenciaState extends State<ConfirmarAsistencia> {
       _hasSearched = true;
     });
 
+    // Limpiar espacios y saltos de línea antes de la búsqueda
+    final nombreLimpio = _nombreController.text.replaceAll(RegExp(r'\s+'), '');
+    final apellidoLimpio = _apellidoController.text.replaceAll(RegExp(r'\s+'), '');
+
     final firestore = FirebaseFirestore.instanceFor(app: Firebase.app());
     Query query = firestore.collection('confirmaciones');
 
     //Query query = FirebaseFirestore.instance.collection('confirmaciones');
 
     if (_nombreController.text.isNotEmpty) {
-      query = query.where('nombre', isEqualTo: _nombreController.text);
+      //query = query.where('nombre', isEqualTo: _nombreController.text);
+      query = query.where('nombre', isEqualTo: nombreLimpio);
     }
 
     if (_apellidoController.text.isNotEmpty) {
-      query = query.where('apellido', isEqualTo: _apellidoController.text);
+      //query = query.where('apellido', isEqualTo: _apellidoController.text);
+      query = query.where('apellido', isEqualTo: apellidoLimpio);
     }
 
     var querySnapshot = await query.get();
