@@ -4,6 +4,7 @@ import 'package:nuestra_boda/presentation/widgets/fullscreen_background.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/constans/assets.dart';
 import '../../../core/theme/colors.dart';
+import '../../../core/utils/DancingAnimation.dart';
 import '../../../core/utils/FadeInUpAnimation.dart';
 import '../../../core/utils/FlowerAnimation.dart';
 import '../../widgets/background_image.dart';
@@ -100,7 +101,51 @@ class DesktopSection7 extends StatelessWidget {
               ],
             ),
 
-            SizedBox(height: 70,),
+            SizedBox(height: 40,),
+            FadeInUpAnimation(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "🎨 Colores Reservados: ",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.brown[700],
+                      fontFamily: 'InriaSerif',
+                    ),
+                  ),
+                  Text(
+                    "Blanco ",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.brown[700],
+                      fontFamily: 'InriaSerif',
+                    ),
+                  ),
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Icon(Icons.favorite, color: Colors.black, size: 20), // Borde negro
+                      Icon(Icons.favorite, color: Colors.white, size: 16), // Corazón blanco
+                    ],
+                  ),
+                  Text(
+                    " y Azul ",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.brown[700],
+                      fontFamily: 'InriaSerif',
+                    ),
+                  ),
+                  Icon(Icons.favorite, color: Colors.blue, size: 18), // Corazón Azul
+                ],
+              ),
+            ),
+            SizedBox(height: 40,),
 
             FadeInUpAnimation(
               child: Text(
@@ -127,7 +172,33 @@ class DesktopSection7 extends StatelessWidget {
               ),
             ),*/
             SizedBox(height: 50,),
-            ElevatedButton(
+            DancingAnimation(
+              child: ElevatedButton(
+                onPressed: () {
+                  GoRouter.of(context).go('/confirmar');
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: colorBottom, // Color de fondo
+                  foregroundColor: textColorButtom, // Color del texto
+                  shadowColor: Colors.black, // Color de la sombra
+                  textStyle: TextStyle(fontWeight: FontWeight.bold),
+                  elevation: 5, // Altura de la sombra
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15), // Espaciado interno
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ), // Bordes redondeados
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.person_add_alt_sharp, color: textColorButtom), // Ícono
+                    SizedBox(width: 10),
+                    Text("Confirmar Asistencia"),
+                  ],
+                ),
+              ),
+            ),
+            /*ElevatedButton(
               onPressed: () {
                 GoRouter.of(context).go('/confirmar');
               },
@@ -148,7 +219,7 @@ class DesktopSection7 extends StatelessWidget {
                   Text("Confirmar Asistencia"),
                 ],
               ),
-            ),
+            ),*/
             Spacer(), // Esto empuja todo hacia arriba y deja espacio abajo
           ],
         ),

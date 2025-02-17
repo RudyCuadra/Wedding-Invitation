@@ -1,8 +1,16 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'dart:html' as html; // Solo se usa en Web
+import 'dart:js_util' as js_util;
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nuestra_boda/presentation/pages/confirmaciones_vista.dart';
 import 'package:nuestra_boda/presentation/pages/confirmar_asistencia.dart';
 import 'package:nuestra_boda/presentation/pages/home_page.dart';// Importa la pantalla de carga
 import 'core/theme/theme.dart';
@@ -10,19 +18,45 @@ import 'core/utils/SplashScreen.dart';
 import 'firebase_options.dart';
 
 // 1️⃣ Define GoRouter fuera del widget MyApp
-final GoRouter _router = GoRouter(
+/*final GoRouter _router = GoRouter(
   initialLocation: '/',
   routes: [
     GoRoute(path: '/', builder: (context, state) => HomePage()),
     GoRoute(path: '/confirmar', builder: (context, state) => ConfirmarAsistencia()),
   ],
+);*/
+
+final GoRouter _router = GoRouter(
+  initialLocation: '/section/1',
+  routes: [
+    GoRoute(
+      path: '/section/:id',
+      builder: (context, state) {
+        final sectionId = int.tryParse(state.pathParameters['id'] ?? '1') ?? 1;
+        return HomePage(initialSection: sectionId);
+      },
+    ),
+    GoRoute(
+      path: '/confirmar',
+      builder: (context, state) => ConfirmarAsistencia(),
+    ),
+    GoRoute(
+      path: '/confirmaciones',
+      builder: (context, state) => ConfirmacionesVista(),
+    ),
+  ],
 );
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: "web/.env");
+
+  //await dotenv.load(fileName: "assets/.env");
+  // Cargar el archivo .env renombrado a env.txt
+  await dotenv.load(fileName: "assets/env.txt");
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
+
+  usePathUrlStrategy();
   runApp(const MyApp());
 }
 

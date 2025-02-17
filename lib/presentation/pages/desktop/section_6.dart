@@ -27,7 +27,7 @@ class DesktopSection6 extends StatelessWidget {
           children: [
             SizedBox(height: 50,),
             Text(
-              "Opciones de regalo",
+              "Regalo",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 50,
@@ -56,7 +56,8 @@ class DesktopSection6 extends StatelessWidget {
             SizedBox(height: 50,),
             FadeInUpAnimation(
               child: Text(
-                "Tu presencia es el regalo mas valioso para\nnosotros en este dia tan especial. Si deseas\nacompanarnos con un detalle adicional, tu\ncarino en forma de un sobre lo apresiariamos\nprofundamente.",
+                //"Tu presencia es el regalo mas valioso para\nnosotros en este dia tan especial. Si deseas\nacompanarnos con un detalle adicional, tu\ncarino en forma de un sobre lo apresiariamos\nprofundamente.",
+                "Si piensas en un regalo para nosotros en\neste día tan especial, queremos decirte que\nun gesto en forma de un sobre será para\nnosotros un detalle valioso que apreciaremos\ncon todo nuestro corazón.",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16,
