@@ -92,14 +92,14 @@ flutter:
     - assets/images/SC1-FDERECGA.png
     - assets/images/flores_bottom1.png
     - assets/images/flores_bottom2.png
-    - assets/images/Imagen1.png
-    - assets/images/Imagen2.png
-    - assets/images/Imagen3.png
+    - assets/images/Imagen1-oficial.jpg
+    - assets/images/Imagen2-oficial.jpg
+    - assets/images/Imagen3-oficial.jpg
     - assets/images/enviar-dinero.png
     - assets/images/LOGO.png
-    - assets/images/Imagen1-desktop.png
-    - assets/images/Imagen2-desktop.png
-    - assets/images/Imagen3-desktop.png
+    - assets/images/Imagen1-desktop-oficial.jpg
+    - assets/images/Imagen2-desktop-oficial.jpg
+    - assets/images/Imagen3-desktop-oficial.jpg
 
   fonts:
     - family: InriaSerif

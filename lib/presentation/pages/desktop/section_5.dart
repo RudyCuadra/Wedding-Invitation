@@ -46,7 +46,20 @@ class DesktopSection5 extends StatelessWidget {
                 height: 8,
               ),
             ),
-            SizedBox(height: 80,),
+            FadeInUpAnimation(
+              child: Text(
+                "📌 Amamos a los niños, pero esta vez celebraremos sin ellos.",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
+                  //height: 0.8,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.brown[700],
+                  fontFamily: 'InriaSerif',
+                ),
+              ),
+            ),
+            SizedBox(height: 50,),
             Image.asset(
               AppAssets.iconoLocation,
               width: 120,
@@ -54,6 +67,19 @@ class DesktopSection5 extends StatelessWidget {
               fit: BoxFit.cover,
             ),
             SizedBox(height: 50,),
+            FadeInUpAnimation(
+              child: Text(
+                "Casa Momentos",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
+                  //height: 0.8,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.brown[700],
+                  fontFamily: 'InriaSerif',
+                ),
+              ),
+            ),
             FadeInUpAnimation(
               child: Text(
                 "Carretera a Masaya, km 11.1, de Plaza Las\nPraderas 30 metros abajo.",

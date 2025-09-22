@@ -24,22 +24,34 @@ class _ConfirmarAsistenciaState extends State<ConfirmarAsistencia> {
       _hasSearched = true;
     });
 
-    // Limpiar espacios y saltos de línea antes de la búsqueda
-    final nombreLimpio = _nombreController.text.replaceAll(RegExp(r'\s+'), '');
-    final apellidoLimpio = _apellidoController.text.replaceAll(RegExp(r'\s+'), '');
+    // Función para formatear el texto correctamente
+    String formatearTexto(String texto) {
+      texto = texto.trim().replaceAll(RegExp(r'\s+'), ''); // Elimina espacios
+      if (texto.isEmpty) return ''; // Manejo de cadena vacía
+      return texto[0].toUpperCase() + texto.substring(1).toLowerCase();
+    }
+
+    final nombreLimpio = formatearTexto(_nombreController.text);
+    final apellidoLimpio = formatearTexto(_apellidoController.text);
+
+    // **🔹 Validación para evitar la consulta si ambos están vacíos**
+    if (nombreLimpio.isEmpty && apellidoLimpio.isEmpty) {
+      setState(() {
+        _resultados = []; // No mostrar nada si no hay datos ingresados
+        _isLoading = false;
+      });
+      return;
+    }
 
     final firestore = FirebaseFirestore.instanceFor(app: Firebase.app());
     Query query = firestore.collection('confirmaciones');
 
-    //Query query = FirebaseFirestore.instance.collection('confirmaciones');
-
-    if (_nombreController.text.isNotEmpty) {
-      //query = query.where('nombre', isEqualTo: _nombreController.text);
+    // **🔹 Aplicar filtro dinámico según lo que se haya ingresado**
+    if (nombreLimpio.isNotEmpty) {
       query = query.where('nombre', isEqualTo: nombreLimpio);
     }
 
-    if (_apellidoController.text.isNotEmpty) {
-      //query = query.where('apellido', isEqualTo: _apellidoController.text);
+    if (apellidoLimpio.isNotEmpty) {
       query = query.where('apellido', isEqualTo: apellidoLimpio);
     }
 
@@ -51,9 +63,11 @@ class _ConfirmarAsistenciaState extends State<ConfirmarAsistencia> {
     });
   }
 
+
   void _mostrarPopup(DocumentSnapshot invitado) {
     bool asistira = (invitado['asistira'] is bool) ? invitado['asistira'] : false;
     bool pendiente = (invitado['pendiente'] is bool) ? invitado['pendiente'] : true;
+    bool guardando = false;
     bool guardadoConExito = false;
 
     showDialog(
@@ -69,6 +83,7 @@ class _ConfirmarAsistenciaState extends State<ConfirmarAsistencia> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    // Botón de Cerrar (X)
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -85,60 +100,86 @@ class _ConfirmarAsistenciaState extends State<ConfirmarAsistencia> {
                             setState(() {
                               _clearDataForm = false;
                             });
-
                           },
                         ),
                       ],
                     ),
-                    SizedBox(height: 10),
-                    Text("Selecciona una opción"),
-                    CheckboxListTile(
-                      title: Text("Pendiente"),
-                      value: pendiente,
-                      onChanged: pendiente ? (value) {} : null,
-                    ),
-                    CheckboxListTile(
-                      title: Text("Asistiré"),
-                      value: asistira && !pendiente,
-                      onChanged: (value) {
-                        setState(() {
-                          asistira = true;
-                          pendiente = false;
-                        });
-                      },
-                    ),
-                    CheckboxListTile(
-                      title: Text("No podré asistir"),
-                      value: !asistira && !pendiente,
-                      onChanged: (value) {
-                        setState(() {
-                          asistira = false;
-                          pendiente = false;
-                        });
-                      },
-                    ),
-                    ElevatedButton(
-                      onPressed: () async {
-                        await FirebaseFirestore.instance
-                            .collection('confirmaciones')
-                            .doc(invitado.id)
-                            .update({'asistira': asistira, 'pendiente': pendiente});
+                    SizedBox(height: 20),
 
-                        setState(() {
-                          guardadoConExito = true;
-                          _clearDataForm = true;
-                        });
-                      },
-                      child: Text("Guardar"),
-                    ),
-                    if (guardadoConExito)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Text(
+                    // Contenido normal o mensaje de éxito
+                    guardadoConExito
+                        ? Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(Icons.check_circle, color: Colors.green, size: 80),
+                        SizedBox(height: 20),
+                        Text(
                           "Tu respuesta fue guardada con éxito ✅",
-                          style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.green,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                      ),
+                        SizedBox(height: 20),
+                      ],
+                    )
+                        : Column(
+                      children: [
+                        Text("Selecciona una opción"),
+                        CheckboxListTile(
+                          title: Text("Pendiente"),
+                          value: pendiente,
+                          onChanged: pendiente ? (value) {} : null,
+                        ),
+                        CheckboxListTile(
+                          title: Text("Asistiré"),
+                          value: asistira && !pendiente,
+                          onChanged: (value) {
+                            setState(() {
+                              asistira = true;
+                              pendiente = false;
+                            });
+                          },
+                        ),
+                        CheckboxListTile(
+                          title: Text("No podré asistir"),
+                          value: !asistira && !pendiente,
+                          onChanged: (value) {
+                            setState(() {
+                              asistira = false;
+                              pendiente = false;
+                            });
+                          },
+                        ),
+                        SizedBox(height: 20),
+
+                        // Mostrar el botón "Guardar" o un indicador de carga
+                        guardando
+                            ? CircularProgressIndicator() // Loader mientras se guarda
+                            : ElevatedButton(
+                          onPressed: () async {
+                            setState(() {
+                              guardando = true; // Muestra el loader
+                            });
+
+                            await FirebaseFirestore.instance
+                                .collection('confirmaciones')
+                                .doc(invitado.id)
+                                .update({'asistira': asistira, 'pendiente': pendiente});
+
+                            setState(() {
+                              guardando = false;
+                              guardadoConExito = true;
+                              _clearDataForm = true;
+                            });
+                          },
+                          child: Text("Guardar"),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
@@ -176,7 +217,7 @@ class _ConfirmarAsistenciaState extends State<ConfirmarAsistencia> {
               children: [
                 SizedBox(height: 60),
                 Text(
-                  "Confirmanos tu\nasistencia",
+                  "Confírmanos tu\nasistencia",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30,

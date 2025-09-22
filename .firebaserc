@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "nuestra-boda-460b7"
-  }
+    "default": "nuestra-boda-460b7",
+    "nuestra-boda": "nuestra-boda-460b7"
+  },
+  "targets": {},
+  "etags": {}
 }

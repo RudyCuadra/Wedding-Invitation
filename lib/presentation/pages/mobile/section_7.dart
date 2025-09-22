@@ -27,7 +27,7 @@ class MobileSection7 extends StatelessWidget {
           children: [
             SizedBox(height: 50,),
             Text(
-              "Codigo de Vestimenta",
+              "Código de Vestimenta",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 50,
@@ -159,7 +159,7 @@ class MobileSection7 extends StatelessWidget {
 
             FadeInUpAnimation(
               child: Text(
-                "Agradecemos de antemano la\nconfirmacion de tu asistencia.",
+                "Agradecemos de antemano la\nconfirmación de tu asistencia.",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16,

@@ -25,12 +25,18 @@ class AppAssets {
   static const String iconoEllas = 'assets/images/icono-ellas.png';
   static const String iconoEllos = 'assets/images/icono-ellos.png';
   static const String iconoTeEsperamos = 'assets/images/te-esperamos.png';
-  static const String imagenS1 = 'assets/images/Imagen1.png';
+  static const String imagenS1 = 'assets/images/Imagen1-oficial.jpg';
+  static const String imagenS1D = 'assets/images/Imagen1-desktop-oficial.jpg';
+  static const String imagenS2 = 'assets/images/Imagen2-oficial.jpg';
+  static const String imagenS2D = 'assets/images/Imagen2-desktop-oficial.jpg';
+  static const String imagenS3 = 'assets/images/Imagen3-oficial.jpg';
+  static const String imagenS3D = 'assets/images/Imagen3-desktop-oficial.jpg';
+  /*static const String imagenS1 = 'assets/images/Imagen1.png';
   static const String imagenS1D = 'assets/images/Imagen1-desktop.png';
   static const String imagenS2 = 'assets/images/Imagen2.png';
   static const String imagenS2D = 'assets/images/Imagen2-desktop.png';
   static const String imagenS3 = 'assets/images/Imagen3.png';
-  static const String imagenS3D = 'assets/images/Imagen3-desktop.png';
+  static const String imagenS3D = 'assets/images/Imagen3-desktop.png';*/
   static const String iconoSobre = 'assets/images/enviar-dinero.png';
   static const String iconoLogo = 'assets/images/LOGO.png';
 }
